@@ -22,7 +22,7 @@ class Customer
         this_amount += (rental.days_rented - 2) * 1.5 if rental.days_rented > 2
       when Movie::NEW_RELEASE
         this_amount += rental.days_rented * 3
-      when Movie::CHILDRENS
+      when Movie::CHILDREN
         this_amount += 1.5
         this_amount += (rental.days_rented - 3) * 1.5 if rental.days_rented > 3
       end
@@ -44,5 +44,5 @@ class Customer
       result += "You earned #{frequent_renter_points} frequent renter points"
     end
     result
-   end
+  end
 end
