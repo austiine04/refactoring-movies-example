@@ -1,7 +1,7 @@
 class Customer
   attr_reader :name
 
-  def intialize(name)
+  def initialize(name)
     @name = name
     @rentals = []
   end
@@ -17,14 +17,14 @@ class Customer
     @rentals.each do |rental|
       this_amount = 0
       case rental.movie.price_code
-      when MOVIE::REGULAR
+      when Movie::REGULAR
         this_amount += 2
-        this_amount += (movie.days_rented - 2) * 1.5 if movie.days_rented > 2
-      when MOVIE::NEW_RELEASE
-        this_amount += element.days_rented * 3
-      when MOVIE::CHILDRENS
+        this_amount += (rental.days_rented - 2) * 1.5 if rental.days_rented > 2
+      when Movie::NEW_RELEASE
+        this_amount += rental.days_rented * 3
+      when Movie::CHILDRENS
         this_amount += 1.5
-        this_amount += (element.days_rented - 3) * 1.5 if element.days_rented > 3
+        this_amount += (rental.days_rented - 3) * 1.5 if rental.days_rented > 3
       end
 
       #add frequent renter points
@@ -36,13 +36,13 @@ class Customer
       end
 
       #show figures for this rental
-      result += "\t" + element.movie.title + "\t" + this_amount.to_s + "\n"
+      result += rental.movie.title + " " + this_amount.to_s + "\n"
       total_amount += this_amount
 
       #add footer lines
-      result += "Amount owed is #{total_amount} \n"
+      result += "Amount owed is #{total_amount}\n"
       result += "You earned #{frequent_renter_points} frequent renter points"
-      result
     end
-  end
+    result
+   end
 end
