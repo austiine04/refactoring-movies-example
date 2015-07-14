@@ -11,19 +11,11 @@ class Customer
   end
 
   def statement
-    total_amount, frequent_renter_points = 0, 0
+    total_amount = 0
     result = "Rental for record #{@name}\n"
 
     @rentals.each do |rental|
       this_amount = rental.charge
-
-      #add frequent renter points
-      frequent_renter_points += 1
-
-      #add bonus for a 2 day new release movie
-      if rental.movie.price_code == Movie::NEW_RELEASE && rental.days_rented > 2
-        frequent_renter_points += 1
-      end
 
       #show figures for this rental
       result += rental.movie.title + " " + this_amount.to_s + "\n"
@@ -31,7 +23,7 @@ class Customer
 
       #add footer lines
       result += "Amount owed is #{total_amount}\n"
-      result += "You earned #{frequent_renter_points} frequent renter points"
+      result += "You earned #{rental.frequent_renter_points} frequent renter points"
     end
     result
   end
