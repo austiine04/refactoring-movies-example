@@ -15,7 +15,7 @@ class Customer
     result = "Rental for record #{@name}\n"
 
     @rentals.each do |rental|
-      this_amount = amount_for rental
+      this_amount = rental.charge
 
       #add frequent renter points
       frequent_renter_points += 1
@@ -34,21 +34,5 @@ class Customer
       result += "You earned #{frequent_renter_points} frequent renter points"
     end
     result
-  end
-
-  private
-  def amount_for(rental)
-    amount = 0
-    case rental.movie.price_code
-    when Movie::REGULAR
-      amount += 2
-      amount += (rental.days_rented - 2) * 1.5 if rental.days_rented > 2
-    when Movie::NEW_RELEASE
-      amount += rental.days_rented * 3
-    when Movie::CHILDREN
-      amount += 1.5
-      amount += (rental.days_rented - 3) * 1.5 if rental.days_rented > 3
-    end
-    amount
   end
 end
