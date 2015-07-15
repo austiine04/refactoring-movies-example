@@ -15,11 +15,9 @@ class Customer
     result = "Rental for record #{@name}\n"
 
     @rentals.each do |rental|
-      this_amount = rental.charge
-
       #show figures for this rental
-      result += rental.movie.title + " " + this_amount.to_s + "\n"
-      total_amount += this_amount
+      result += rental.movie.title + " " + rental.charge.to_s + "\n"
+      total_amount += rental.charge
 
       #add footer lines
       result += "Amount owed is #{total_amount}\n"
